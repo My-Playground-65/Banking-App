@@ -27,6 +27,7 @@ public class BankApp {
 
         String[] userIds = new String[0];
         String[] userNames = new String[0];
+        Double[] userBalance = new Double[0];
 
         mainLoop:
 
@@ -47,7 +48,7 @@ public class BankApp {
                     System.out.println("\t[3]. Withdrawal");
                     System.out.println("\t[4]. Transfer");
                     System.out.println("\t[5]. Check Balance)");
-                     System.out.println("\t[6]. Delete Statement");
+                    System.out.println("\t[6]. Delete Statement");
                     System.out.print("\tEnter an option to continue: ");
                     int option = SCANNER.nextInt();
                     SCANNER.nextLine();
@@ -105,6 +106,7 @@ public class BankApp {
                         //Initial Deposit Validation
 
                         boolean isValidDepo;
+                        double intDepo = 0;
 
                         do{
 
@@ -118,7 +120,7 @@ public class BankApp {
                                 isValidDepo = false;
                                 continue;
                             }
-                            double intDepo = Double.parseDouble(strDepo);
+                            intDepo = Double.parseDouble(strDepo);
 
                             if(intDepo < 5000){
                                 System.out.printf(ERROR_MSG, "Insufficient Initial Deposit");
@@ -130,20 +132,24 @@ public class BankApp {
 
                         String[] newUserIds = new String[userIds.length + 1];
                         String[] newUserNames = new String[userNames.length + 1];
+                        Double[] newUserBalance = new Double[userIds.length + 1];
                         for (int i = 0; i < userIds.length; i++) {
                             newUserIds[i] = userIds[i];
                             newUserNames[i] = userNames[i];
+                            newUserBalance[i] = userBalance[i];
                         }
 
                         newUserIds[newUserIds.length - 1] = id;
                         newUserNames[newUserNames.length - 1] = name;
+                        newUserBalance[newUserBalance.length-1 ]= intDepo;
                         userIds = newUserIds;
                         userNames = newUserNames;
+                        userBalance = newUserBalance;
 
                         System.out.println(Arrays.toString(userNames));
                         System.out.println(Arrays.toString(userIds));
-
-
+                         System.out.println(Arrays.toString(userBalance));
+                        
 
                         System.out.printf("\t%s%s%s%s%s%s%s",COLOR_GREEN_BOLD,"ID: ", id, " |Name : ", name, " account created succefully \n",RESET);
                         System.out.print("Do you want to continue (Y/N) ? ");
